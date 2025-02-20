@@ -6,4 +6,4 @@ As this project develops this page will be updated with information such as what
 
 **Team:** Artem, Enea, Yulian, Luis
 
-**Project Status:** Sprint 1.
+**Project Status:** Sprint 2.
