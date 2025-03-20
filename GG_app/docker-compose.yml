@@ -1,4 +1,4 @@
-version: '3.3'
+
 services:
   web:
     build:
@@ -19,6 +19,7 @@ services:
       - "3308:3306"
     volumes:
       - ./db:/var/lib/mysql
+      - ./game_gurus_db.sql:/docker-entrypoint-initdb.d/init.sql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
