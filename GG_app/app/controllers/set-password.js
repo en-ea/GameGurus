@@ -1,4 +1,6 @@
-app.post('/set-password', async function (req, res) {
+const { User } = require("../classes/user");
+
+exports.setPassword = async (req, res) => {
     const params = req.body;
     const user = new User(params.email);
     try {
@@ -16,4 +18,4 @@ app.post('/set-password', async function (req, res) {
         console.error(`Error while adding password: `, err.message);
         res.status(500).send("Internal server error");
     }
-});
+};

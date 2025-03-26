@@ -1,11 +1,14 @@
+const { User } = require("../classes/user");
+
 // Check submitted email and password pair
-app.post('/authenticate', async function (req, res) {
+exports.authenticate = async (req, res) => {
     params = req.body;
     var user = new User(params.email);
     try {
         uId = await user.getIdFromEmail();
         if (uId) {
             match = await user.authenticate(params.password);
+            console.log("Hello, this section is looking goood", match);
             if (match) {
                 req.session.uid = uId;
                 req.session.loggedIn = true;
@@ -23,4 +26,4 @@ app.post('/authenticate', async function (req, res) {
     } catch (err) {
         console.error(`Error while comparing `, err.message);
     }
-});
+};

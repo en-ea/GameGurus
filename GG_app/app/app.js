@@ -15,8 +15,9 @@ app.set('views', './app/views');
 const db = require('./services/db');
 app.use(express.urlencoded({ extended: true }));
 
-// Get the models
-const { User } = require("./classes/user");
+// Get the classes and controllers
+const set_password = require("./controllers/set-password");
+const authenticate = require("./controllers/authenticate");
 
 // Set the sessions
 var session = require('express-session');
@@ -39,19 +40,21 @@ app.get("/", function(req, res) {
 });
 
 // Register
-app.get('/register', function (req, res) {
-    res.render('register');
+app.get("/register", async function (req, res) {
+    res.render("register");
 });
+app.post("/setPassword", set_password.setPassword);
 
 // Login
-app.get('/login', function (req, res) {
-    res.render('login');
+app.get("/login", async function (req, res) {
+    res.render("login");
 });
+app.post("/authenticate", authenticate.authenticate);
 
 // Logout
-app.get('/logout', function (req, res) {
+app.get("/logout", function (req, res) {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect("/login");
   });
 
 // Start server on port 3000
