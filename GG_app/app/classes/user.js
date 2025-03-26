@@ -18,9 +18,8 @@ class User {
     async getIdFromEmail() {
         var sql = "SELECT user_ID FROM Users WHERE Users.email = ?";
         const result = await db.query(sql, [this.email]);
-        // TODO LOTS OF ERROR CHECKS HERE..
         if (JSON.stringify(result) != '[]') {
-            this.id = result[0].id;
+            this.id = result[0].user_ID;
             return this.id;
         }
         else {
@@ -39,24 +38,44 @@ class User {
     // Add a new record to the users table    
     async addUser(password) {
         const pw = await bcrypt.hash(password, 10);
-        var sql = "INSERT INTO Users (email, password) VALUES (? , ?)";
-        const result = await db.query(sql, [this.email, pw]);
-        console.log(result.insertId);
-        this.id = result.insertId;
+    
+        // Get the highest existing user_ID
+        var sqlGetMax = "SELECT user_ID FROM Users WHERE user_ID REGEXP '^U[0-9]+$' ORDER BY CAST(SUBSTRING(user_ID, 2) AS UNSIGNED) DESC LIMIT 1";
+        const result = await db.query(sqlGetMax);
+    
+        let newId = "U1"; // Default for the first user
+    
+        if (result.length > 0) {
+            const lastId = result[0].user_ID; // e.g., "U5"
+            const lastNum = parseInt(lastId.substring(1)); // Extract number part
+            newId = "U" + (lastNum + 1); // Increment number and format new ID
+        }
+    
+        // Insert new user
+        var sqlInsert = "INSERT INTO Users (user_ID, email, password) VALUES (?, ?, ?)";
+        await db.query(sqlInsert, [newId, this.email, pw]);
+    
+        this.id = newId;
         return this.id;
     }
-
+    
     // Test a submitted password against a stored password
     async authenticate(submitted) {
-        // Get the stored, hashed password for the user
-        var sql = "SELECT password FROM Users WHERE user_iD = ?";
+        var sql = "SELECT password FROM Users WHERE user_ID = ?";
         const result = await db.query(sql, [this.id]);
-        const match = await bcrypt.compare(submitted, result[0].password);
-        if (match) {
-            return true;
+
+        if (result.length === 0) {
+            return false; // No user found
         }
-        else {
-            return false;
+
+        const storedPassword = result[0].password;
+
+        // Check if the stored password is hashed (Bcrypt hashes start with "$2")
+        if (storedPassword.startsWith("$2")) {
+            return await bcrypt.compare(submitted, storedPassword);
+        } else {
+            // Compare plaintext passwords
+            return submitted === storedPassword;
         }
     }
 }

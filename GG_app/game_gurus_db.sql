@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 23, 2025 at 10:44 PM
+-- Generation Time: Mar 26, 2025 at 07:20 PM
 -- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
@@ -137,7 +137,7 @@ CREATE TABLE `Users` (
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL
+  `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'User'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

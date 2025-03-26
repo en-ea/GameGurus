@@ -13,7 +13,7 @@ exports.authenticate = async (req, res) => {
                 req.session.uid = uId;
                 req.session.loggedIn = true;
                 console.log(req.session.id);
-                res.redirect('/single-student/' + uId);
+                res.redirect("/");
             }
             else {
                 // TODO improve the user journey here
