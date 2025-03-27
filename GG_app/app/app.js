@@ -57,6 +57,16 @@ app.get("/logout", function (req, res) {
     res.redirect("/login");
   });
 
+// Wellcome page
+app.get("/welcome", function (req, res) {
+  res.render("welcome");
+});
+
+// Main page
+app.get("/main_p", function (req, res) {
+  res.render("main_p");
+});
+
 // Start server on port 3000
 app.listen(3000,function(){
     console.log(`Server running at http://127.0.0.1:3000/`);
