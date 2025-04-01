@@ -79,8 +79,6 @@ app.get('/games/:id', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
------------
-
 
 // Get the functions in the db.js file to use
 const db = require('./services/db');
