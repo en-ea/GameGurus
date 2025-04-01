@@ -1,0 +1,28 @@
+// Extends the base layout template
+// This inherits the structure from the parent template
+extends layout
+
+// Defines the content block that will be injected into the layout
+block content
+  // Displays the page title (passed from the route as 'title' variable)
+  h1= title
+  
+  // Container for the users grid layout
+  .users-grid
+    // Checks if users array exists and has items
+    if users && users.length
+      // Loops through each user in the users array
+      each user in users
+        // Card container for individual user
+        .user-card
+          // Displays the username
+          h3= user.username
+          
+          // Displays the user's role with a label
+          p.user-role Role: #{user.role}
+          
+          // Link to view the user's profile (dynamic URL with user.id)
+          a.btn(href=`/users/${user.id}`) View Profile
+    else
+      // Fallback message when no users are found
+      p No users found.
