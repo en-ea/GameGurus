@@ -25,3 +25,26 @@ block content
             a.btn(href=`/tips/${tip.id}`) Read More
       else
         p No tips available yet.
+  
+  //- Games section with category browsing
+  section.games-section
+    h2 Browse Games by Category
+    .categories-list
+      if categories && categories.length
+        each category in categories
+          a.category-tag(href=`/category/${category.id}`)= category.name
+      else
+        p No categories available.
+    
+    //- Popular games grid
+    h2 Popular Games
+    .games-grid
+      if games && games.length
+        each game in games
+          .game-card
+            h3= game.title
+            if game.platform
+              p Platform: #{game.platform}
+            a.btn(href=`/games/${game.id}`) View Game
+      else
+        p No games available yet.
