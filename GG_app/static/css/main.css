@@ -12,3 +12,26 @@ body {
   color: #333;
   background-color: #f4f4f4;
 }
+
+/* Link styles */
+a {
+  color: #6b21a8; /* Purple from GameGurus logo */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #8b5cf6;
+}
+
+/* Heading margins */
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
+
+/* Layout container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
