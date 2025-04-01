@@ -1,0 +1,22 @@
+//- Individual game details page
+extends layout
+block content
+  .game-detail
+    h1= game.title
+    
+    //- section for game info
+    .game-info
+      if game.platform
+        p.game-meta Platform: #{game.platform}
+      if game.release_date
+        p.game-meta Release Date: #{new Date(game.release_date).toLocaleDateString()}
+      if game.description
+        h2 Description
+        p= game.description
+      
+      //- Game categories
+      if categories && categories.length
+        h2 Categories
+        .category-list
+          each category in categories
+            span.category-tag= category.name
