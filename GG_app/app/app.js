@@ -1,15 +1,86 @@
-// Import express.js
-const express = require("express");
+const express = require('express');
+const path = require('path');
+const Game = require('./models/game');
+const Tip = require('./models/tip');
+const Category = require('./models/category');
+const User = require('./models/user');
 
-// Create express app
-var app = express();
+// begin express app
+const app = express();
 
-// Add static files location
-app.use(express.static("static"));
+// Configurez thr middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../static')));
 
-// Use the Pug templating engine
+// Set up engine for pug templating
 app.set('view engine', 'pug');
-app.set('views', './app/views');
+app.set('views', '/usr/src/app/app/views');
+
+// route to the home page
+app.get('/', async (req, res) => {
+    try {
+        // Get recent tips/games for the home page
+        const tips = await Tip.getAllTips();
+        const games = await Game.getAllGames();
+        const categories = await Category.getAllCategories();
+        
+        res.render('home', {
+            title: 'Game Gurus - Gaming Tips & Tricks',
+            tips: tips.slice(0, 3), 
+            games: games,
+            categories: categories
+        });
+    } catch (error) {
+        console.error('Error loading home page:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+// route for gameslist
+app.get('/games', async (req, res) => {
+    try {
+        const games = await Game.getAllGames();
+        const categories = await Category.getAllCategories();
+        
+        res.render('games', {
+            title: 'All Games',
+            games: games,
+            categories: categories
+        });
+    } catch (error) {
+        console.error('Error loading games:', error);
+        res.status(500).send('Server error');
+    }
+});
+
+// route to game detail
+app.get('/games/:id', async (req, res) => {
+    try {
+        const gameId = req.params.id;
+        const game = new Game(gameId);
+        
+        // Get game details
+        await game.getGameById();
+        
+        // Get game categories
+        const categories = await game.getGameCategories();
+        
+        // Get tips for this game
+        const tips = await game.getGameTips();
+        
+        res.render('game-detail', {
+            title: game.title,
+            game: game,
+            categories: categories,
+            tips: tips
+        });
+    } catch (error) {
+        console.error('Error loading game details:', error);
+        res.status(500).send('Server error');
+    }
+});
+-----------
+
 
 // Get the functions in the db.js file to use
 const db = require('./services/db');
@@ -18,26 +89,6 @@ app.use(express.urlencoded({ extended: true }));
 // Get the classes and controllers
 const set_password = require("./controllers/set-password");
 const authenticate = require("./controllers/authenticate");
-
-// Set the sessions
-var session = require('express-session');
-app.use(session({
-  secret: 'secretkeysdfjsflyoifasd',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
-
-// Create a route for root - /
-app.get("/", function(req, res) {
-    console.log(req.session);
-    if (req.session.uid) {
-		res.send('Welcome back, ' + req.session.uid + '!');
-	} else {
-		res.send('Please login to view this page!');
-	}
-	res.end();
-});
 
 // Register
 app.get("/register", async function (req, res) {
