@@ -1,0 +1,37 @@
+version: '3'
+services:
+  # Node.js web application container configuration
+  app:
+    build: .                     # build using local Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db                       # Ensure database container starts before app
+    environment:
+      - DB_HOST=db               # hostname/container name for database
+      - DB_USER=root             # database username
+      - DB_PASSWORD=password     # db password
+      - DB_NAME=game_gurus       # db name
+    restart: always              # if container crashes will restart by itself automatically
+
+  # container configuration for MySQL database
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./game_gurus.sql:/docker-entrypoint-initdb.d/game_gurus.sql  # Initialise database
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password  # Set root password
+      - MYSQL_DATABASE=game_gurus     # Make initial database
+      - MYSQL_ROOT_HOST=%       # Allow connections from any host
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always             # container will restart automatically if it crashes
+
+# Define persistent volumes
+volumes:
+  mysql_data:                   # Volume for MySQL data to persist between reboots

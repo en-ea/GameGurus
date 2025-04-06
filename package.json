@@ -1,0 +1,19 @@
+{
+    "name": "game-gurus",
+    "version": "1.0.0",
+    "description": "A platform for sharing gaming tips and tricks",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "dev": "nodemon index.js"
+    },
+    "dependencies": {
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "mysql2": "^3.1.0",
+      "pug": "^3.0.2"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.20"
+    }
+  }
