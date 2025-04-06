@@ -1,0 +1,31 @@
+//- Extends the base layout template
+extends layout
+
+//- Main content block that replaces layout's content
+block content
+  //- Page heading
+  h1 Sign Up
+  
+  //- Signup form
+  form(action="/setPassword", method="POST")
+    //- Username input field
+    div
+      label(for="username") Username:
+      input#username(type="text", name="username", required)
+    
+    //- Email input field
+    div
+      label(for="email") Email:
+      input#email(type="email", name="email", required)
+    
+    //- Password input field
+    div
+      label(for="password") Password:
+      input#password(type="password", name="password", required)
+    
+    //- Form actions
+    div
+      //- Submit button
+      button.btn(type="submit") Sign Up
+      //- Login link for existing users
+      a(href="/login") Already have an account? Login

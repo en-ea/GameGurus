@@ -1,0 +1,32 @@
+extends layout
+block content
+  h1= title
+  
+  //- Category filter section
+  .categories-filter
+    h3 Filter by Category:
+    .category-buttons
+      a.category-btn(href="/games", class=!currentCategory ? 'active' : '') All
+      //- Individual category buttons
+      if categories && categories.length
+        each category in categories
+          a.category-btn(href=`/category/${category.id}`, class=currentCategory == category.id ? 'active' : '')= category.name
+  
+  //- Games grid display
+  .games-grid
+    if games && games.length
+      each game in games
+        .game-card
+          h3= game.title
+          if game.platform
+            p Platform: #{game.platform}
+          if game.description
+            //- Truncate description if it's too long
+            p= game.description.substring(0, 100) + (game.description.length > 100 ? '...' : '')
+          a.btn(href=`/games/${game.id}`) View Details
+    else
+<<<<<<< HEAD
+      p No games found.
+=======
+      p No games found.
+>>>>>>> baaee21f0a46c6caae60e3a757d6bf2ff5764f95

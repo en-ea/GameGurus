@@ -1,0 +1,33 @@
+//- Extends the base layout template 
+extends layout
+
+//- Content block that replaces 'block content'
+block content
+  //- Page title (dynamic from route)
+  h1= title
+  
+  //- Grid container for tips
+  .tips-grid
+    //- Check if tips exist and aren't empty
+    if tips && tips.length
+      //- Loop through each tip
+      each tip in tips
+        //- Individual tip card
+        .tip-card
+          //- Tip title
+          h3= tip.title
+          //- Associated game name
+          p Game: #{tip.game_title}
+          //- Author username
+          p By: #{tip.username}
+          //- Truncated tip content (first 100 chars + ellipsis if longer)
+          p= tip.content.substring(0, 100) + (tip.content.length > 100 ? '...' : '')
+          //- Link to full tip view
+          a.btn(href=`/tips/${tip.id}`) Read More
+    else
+      //- Message shown when no tips exist
+<<<<<<< HEAD
+      p No tips found.
+=======
+      p No tips found.
+>>>>>>> baaee21f0a46c6caae60e3a757d6bf2ff5764f95
