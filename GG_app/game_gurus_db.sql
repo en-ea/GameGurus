@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 26, 2025 at 07:20 PM
+-- Generation Time: Apr 05, 2025 at 06:04 PM
 -- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
@@ -28,103 +28,174 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Account` (
-  `user_ID` varchar(50) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   `profile_picture` blob,
-  `tip_ID` varchar(50) DEFAULT NULL
+  `tip_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Account`
 --
 
-INSERT INTO `Account` (`user_ID`, `profile_picture`, `tip_ID`) VALUES
-('ASH', NULL, 'T4'),
-('LG', NULL, 'T1'),
-('EN', NULL, 'T2'),
-('YU', NULL, 'T3'),
-('U1', NULL, 'T5');
+INSERT INTO `Account` (`user_id`, `profile_picture`, `tip_id`) VALUES
+(1, NULL, 3),
+(2, NULL, 1),
+(3, NULL, 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Comment`
+-- Table structure for table `Categories`
 --
 
-CREATE TABLE `Comment` (
-  `comment_ID` varchar(50) NOT NULL,
-  `tip_ID` varchar(50) DEFAULT NULL,
-  `user_ID` varchar(50) DEFAULT NULL,
-  `content` varchar(1500) DEFAULT NULL
+CREATE TABLE `Categories` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `Comment`
+-- Dumping data for table `Categories`
 --
 
-INSERT INTO `Comment` (`comment_ID`, `tip_ID`, `user_ID`, `content`) VALUES
-('C1', 'T1', 'U5', 'Great tip! Helped me improve my K/D ratio.'),
-('C2', 'T2', 'U2', 'I never thought about wave control like that, thanks!'),
-('C3', 'T3', 'U4', 'Classic advice but essential for survival.'),
-('C4', 'T4', 'U3', 'That boss drove me crazy. This tip saved me!'),
-('C5', 'T5', 'U1', 'Building mechanics are tricky, but this helps a lot.');
+INSERT INTO `Categories` (`id`, `name`) VALUES
+(1, 'Action'),
+(2, 'Adventure'),
+(10, 'Battle Royale'),
+(9, 'Card Game'),
+(11, 'Metroidvania'),
+(7, 'Party'),
+(8, 'Platformer'),
+(3, 'RPG'),
+(12, 'Sandbox'),
+(6, 'Shooter'),
+(13, 'Simulation'),
+(5, 'Sports'),
+(4, 'Strategy');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Game`
+-- Table structure for table `Comments`
 --
 
-CREATE TABLE `Game` (
-  `game_name` varchar(255) NOT NULL,
-  `genre` varchar(100) DEFAULT NULL,
-  `description` varchar(1000) DEFAULT NULL
+CREATE TABLE `Comments` (
+  `id` int NOT NULL,
+  `content` text NOT NULL,
+  `tip_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `Game`
+-- Dumping data for table `Comments`
 --
 
-INSERT INTO `Game` (`game_name`, `genre`, `description`) VALUES
-('Among Us', 'Party', 'A multiplayer social deduction game where players work together as crewmates on a spaceship while trying to identify and eliminate impostors before they sabotage the mission.'),
-('Breath of the Wild', 'Action-Adventure', 'The Legend of Zelda: Breath of the Wild is an expansive open-world action-adventure game where players explore the vast land of Hyrule. Combining exploration, puzzle-solving, and combat, it offers freedom to approach challenges in multiple ways.'),
-('Clash Royale', 'Strategy/Card Game', 'Clash Royale is a real-time multiplayer strategy game combining card collection, tower defense, and fast-paced duels. Players build custom decks and deploy units to destroy their opponent’s towers while defending their own.'),
-('Cyberpunk 2077', 'RPG', 'A futuristic open-world RPG set in the neon-lit Night City, where players take on the role of V, a mercenary seeking immortality. Customize your character, make impactful choices, and engage in thrilling combat.'),
-('Dark Souls III', 'Action RPG', 'A punishing yet rewarding action RPG set in a dark, gothic world filled with terrifying enemies and challenging bosses. Master strategic combat, uncover deep lore, and endure a test of skill and patience.'),
-('Fortnite', 'Battle Royale', 'Fortnite is a fast-paced battle royale game where players build structures while fighting to be the last one standing. Featuring vibrant graphics and constant updates, it combines shooting mechanics with creative building elements.'),
-('Hollow Knight', 'Metroidvania', 'A beautifully crafted 2D action platformer set in the hauntingly mysterious world of Hallownest. Explore interconnected environments, battle dangerous creatures, and unlock powerful abilities.'),
-('Minecraft', 'Sandbox', 'A creative and survival-based sandbox game where players can build structures, craft tools, explore an endless world, and fight off monsters. With both single and multiplayer modes, the possibilities are endless.'),
-('Stardew Valley', 'Simulation', 'A relaxing farming simulation game where players take over a rundown farm, grow crops, raise animals, interact with villagers, and even explore caves filled with monsters and treasures.'),
-('Super Mario Odyssey', 'Platformer', 'A 3D platforming adventure featuring Mario and his new companion, Cappy. Travel across unique kingdoms, solve puzzles, and defeat Bowser to rescue Princess Peach.'),
-('The Elder Scrolls V: Skyrim', 'RPG', 'An expansive open-world fantasy RPG set in the land of Skyrim. Players can explore vast landscapes, complete quests, fight dragons, and shape their own story through choices and character progression.'),
-('The Legend of Zelda: Breath of the Wild', 'Adventure', 'An open-world action-adventure game set in the kingdom of Hyrule. Players can climb, glide, and battle their way through breathtaking landscapes while uncovering the story of the fallen kingdom.'),
-('Valorant', 'FPS', 'A team-based tactical shooter where players select unique agents, each with special abilities. Combining precise gunplay with strategic teamwork, this competitive game offers intense 5v5 matches.');
+INSERT INTO `Comments` (`id`, `content`, `tip_id`, `user_id`, `created_at`) VALUES
+(1, 'This really helped me defeat the boss!', 2, 2, '2025-04-03 19:13:55'),
+(2, 'The ball roll is essential for higher difficulty.', 3, 3, '2025-04-03 19:13:55');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Tip`
+-- Table structure for table `Games`
 --
 
-CREATE TABLE `Tip` (
-  `tip_ID` varchar(50) NOT NULL,
-  `game_name` varchar(255) DEFAULT NULL,
-  `user_ID` varchar(50) DEFAULT NULL,
+CREATE TABLE `Games` (
+  `id` int NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text,
+  `platform` varchar(100) DEFAULT NULL,
+  `release_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `image_url` blob
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Games`
+--
+
+INSERT INTO `Games` (`id`, `title`, `description`, `platform`, `release_date`, `image_url`) VALUES
+(1, 'The Legend of Zelda', 'An open-world action-adventure game', 'Nintendo Switch', '2017-03-03 00:00:00', NULL),
+(2, 'Elden Ring', 'An action RPG by FromSoftware', 'PlayStation, Xbox, PC', '2022-02-25 00:00:00', NULL),
+(3, 'FIFA 25', 'A football simulation game', 'PlayStation, Xbox, PC', '2024-09-07 00:00:00', NULL),
+(4, 'Call of Duty', 'A first-person shooter game', 'PlayStation, Xbox, PC', '2022-10-28 00:00:00', NULL),
+(5, 'The Elder Scrolls V: Skyrim', 'An expansive open-world fantasy RPG set in the land of Skyrim. Players can explore vast landscapes, complete quests, fight dragons, and shape their own story through choices and character progression.', 'PC, PS4, Xbox One, Switch', '2025-04-05 11:23:50', NULL),
+(6, 'Dark Souls III', 'A punishing yet rewarding action RPG set in a dark, gothic world filled with terrifying enemies and challenging bosses. Master strategic combat, uncover deep lore, and endure a test of skill and patience.', 'PC, PS4, Xbox One', '2025-04-05 11:23:50', NULL),
+(7, 'Minecraft', 'A creative and survival-based sandbox game where players can build structures, craft tools, explore an endless world, and fight off monsters. With both single and multiplayer modes, the possibilities are endless.', 'PC, PS4, Xbox One, Switch, Mobile', '2025-04-05 11:23:50', NULL),
+(8, 'Valorant', 'A team-based tactical shooter where players select unique agents, each with special abilities. Combining precise gunplay with strategic teamwork, this competitive game offers intense 5v5 matches.', 'PC', '2025-04-05 11:23:50', NULL),
+(9, 'Stardew Valley', 'A relaxing farming simulation game where players take over a rundown farm, grow crops, raise animals, interact with villagers, and even explore caves filled with monsters and treasures.', 'PC, PS4, Xbox One, Switch, Mobile', '2025-04-05 11:23:50', NULL),
+(10, 'Hollow Knight', 'A beautifully crafted 2D action platformer set in the hauntingly mysterious world of Hallownest. Explore interconnected environments, battle dangerous creatures, and unlock powerful abilities.', 'PC, PS4, Xbox One, Switch', '2025-04-05 11:23:50', NULL),
+(11, 'Cyberpunk 2077', 'A futuristic open-world RPG set in the neon-lit Night City, where players take on the role of V, a mercenary seeking immortality. Customize your character, make impactful choices, and engage in thrilling combat.', 'PC, PS4, PS5, Xbox One, Xbox Series X/S', '2025-04-05 11:23:50', NULL),
+(12, 'Among Us', 'A multiplayer social deduction game where players work together as crewmates on a spaceship while trying to identify and eliminate impostors before they sabotage the mission.', 'PC, Switch, Mobile, PS4, Xbox One', '2025-04-05 11:23:50', NULL),
+(13, 'Fortnite', 'Fortnite is a fast-paced battle royale game where players build structures while fighting to be the last one standing.', 'PC, PS4, PS5, Xbox One, Xbox Series X/S, Switch, Mobile', '2025-04-05 11:23:50', NULL),
+(14, 'Clash Royale', 'Clash Royale is a real-time multiplayer strategy game combining card collection, tower defense, and fast-paced duels.', 'Mobile', '2025-04-05 11:23:50', NULL),
+(15, 'Super Mario Odyssey', 'A 3D platforming adventure featuring Mario and his new companion, Cappy. Travel across unique kingdoms, solve puzzles, and defeat Bowser to rescue Princess Peach.', 'Switch', '2025-04-05 11:23:50', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Game_Category`
+--
+
+CREATE TABLE `Game_Category` (
+  `game_id` int NOT NULL,
+  `category_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Game_Category`
+--
+
+INSERT INTO `Game_Category` (`game_id`, `category_id`) VALUES
+(1, 1),
+(2, 1),
+(1, 2),
+(2, 3),
+(5, 3),
+(6, 3),
+(11, 3),
+(14, 4),
+(3, 5),
+(4, 6),
+(8, 6),
+(12, 7),
+(15, 8),
+(14, 9),
+(13, 10),
+(10, 11),
+(7, 12),
+(9, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Tips`
+--
+
+CREATE TABLE `Tips` (
+  `id` int NOT NULL,
+  `title` varchar(100) NOT NULL,
   `focus_area` varchar(100) DEFAULT NULL,
-  `level` varchar(50) DEFAULT NULL,
-  `platform` varchar(50) DEFAULT NULL,
-  `content` varchar(2500) DEFAULT NULL
+  `level` varchar(100) DEFAULT NULL,
+  `content` text NOT NULL,
+  `game_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `Tip`
+-- Dumping data for table `Tips`
 --
 
-INSERT INTO `Tip` (`tip_ID`, `game_name`, `user_ID`, `focus_area`, `level`, `platform`, `content`) VALUES
-('T1', 'Minecraft', 'ASH', 'Gameplay', 'For Beginners', 'PC', 'When starting out in Minecraft, prioritize gathering basic resources like wood, stone, and food. Craft essential tools such as a pickaxe, axe, and swg your builord to speed up resource collection and protect yourself from hostile mobs. Build a simple shelter before nightfall to avoid dangers like zombies and skeletons. Also, remember to craft torches early on—they will help you light up caves and prevent mob spawns.'),
-('T2', 'Fortnite', 'LG', 'Gameplay', 'For Intermediate', 'PC', 'As an intermediate Fortnite player, focus on improvinding skills. Practice quickly building walls, ramps, and boxes during fights to gain the high ground. Also, learn to edit structures swiftly, allowing you to outmaneuver opponents. Pay attention to the storm circle and always rotate early to avoid getting caught off guard.'),
-('T3', 'Valorant', 'EN', 'Gameplay', 'For Pros', 'PC', 'Professional Valorant players should focus on perfecting crosshair placement and minimizing unnecessary movements. Communicate precisely with your team and coordinate utility usage (smokes, flashes, etc.) to execute site takes or defenses efficiently. Regularly review your gameplay replays to identify mistakes and improve decision-making under pressure.'),
-('T4', 'Clash Royale', 'YU', 'Strategy', 'All above', 'Mobile', 'Whether you are new or experienced in Clash Royale, always pay attention to elixir management. Avoid overcommitting by deploying too many high-cost cards at once. Learn to counter popular decks and have a balance of offensive and defensive units. Don\'t forget to watch top players’ matches to understand advanced tactics.'),
-('T5', 'Breath of the Wild', 'ASH', 'Lore', 'For Beginners', 'Console', 'In Breath of the Wild, exploration is key. Always keep an eye out for shrines, Korok seeds, and hidden chests. Cooking food with various ingredients not only restores health but grants powerful buffs. Spend time understanding the backstory by visiting various villages and speaking to NPCs to fully immerse yourself in Hyrule’s lore.');
+INSERT INTO `Tips` (`id`, `title`, `focus_area`, `level`, `content`, `game_id`, `user_id`, `created_at`) VALUES
+(1, 'Cooking Guide', 'Guide', 'For Begginers', 'Combine food ingredients to create dishes that restore health.', 1, 2, '2025-04-03 19:13:55'),
+(2, 'Boss Strategy', 'Strategy', 'For Intermediate', 'For the Margit boss fight, use the Jellyfish Spirit summon.', 2, 3, '2025-04-03 19:13:55'),
+(3, 'Pass Assist', 'Gameplay', 'For All levels', 'Turn on Assisted pass for higher accuracy as a beginner', 3, 2, '2025-04-03 19:13:55'),
+(4, 'Weapon Loadout', 'Gameplay', 'For All levels', 'The M4 with a suppressor is great for stealth missions.', 4, 3, '2025-04-03 19:13:55'),
+(5, 'Minecraft First Night Tips', 'Guide', 'For Beginners', 'When starting out in Minecraft, prioritize gathering basic resources like wood, stone, and food. Craft essential tools such as a pickaxe, axe, and sword to speed up resource collection and protect yourself from hostile mobs. Build a simple shelter before nightfall to avoid dangers like zombies and skeletons. Also, remember to craft torches early on—they will help you light up caves and prevent mob spawns.', 7, 14, '2025-04-05 17:38:04'),
+(6, 'Fortnite Building Basics', 'Gameplay', 'For Intermediate', 'As an intermediate Fortnite player, focus on improving your building skills. Practice quickly building walls, ramps, and boxes during fights to gain the high ground. Also, learn to edit structures swiftly, allowing you to outmaneuver opponents. Pay attention to the storm circle and always rotate early to avoid getting caught off guard.', 13, 10, '2025-04-05 17:38:04'),
+(7, 'Pro Valorant Tactics', 'Gameplay', 'For Pros', 'Professional Valorant players should focus on perfecting crosshair placement and minimizing unnecessary movements. Communicate precisely with your team and coordinate utility usage (smokes, flashes, etc.) to execute site takes or defenses efficiently. Regularly review your gameplay replays to identify mistakes and improve decision-making under pressure.', 8, 11, '2025-04-05 17:38:04'),
+(8, 'Elixir Tips for Clash Royale', 'Strategy', 'All Levels', 'Whether you are new or experienced in Clash Royale, always pay attention to elixir management. Avoid overcommitting by deploying too many high-cost cards at once. Learn to counter popular decks and have a balance of offensive and defensive units. Don\'t forget to watch top players’ matches to understand advanced tactics.', 14, 13, '2025-04-05 17:38:04'),
+(9, 'Explore Hyrule Smartly', 'Lore', 'For Beginners', 'The Legend of Zelda, exploration is key. Always keep an eye out for shrines, Korok seeds, and hidden chests. Cooking food with various ingredients not only restores health but grants powerful buffs. Spend time understanding the backstory by visiting various villages and speaking to NPCs to fully immerse yourself in Hyrule’s lore.', 1, 12, '2025-04-05 17:38:04');
 
 -- --------------------------------------------------------
 
@@ -133,27 +204,31 @@ INSERT INTO `Tip` (`tip_ID`, `game_name`, `user_ID`, `focus_area`, `level`, `pla
 --
 
 CREATE TABLE `Users` (
-  `user_ID` varchar(50) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'User'
+  `id` int NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('guest','user','admin') DEFAULT 'user',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`user_ID`, `username`, `email`, `password`, `role`) VALUES
-('ASH', 'ArtemShkurat', 'artem@example.com', 'admin_password1', 'Admin'),
-('EN', 'Enea', 'enea@example.com', 'admin_password3', 'Admin'),
-('LG', 'LuisGarcia', 'luis@example.com', 'admin_password2', 'Admin'),
-('U1', 'GamerKing', 'gamerking@example.com', 'hashed_password1', 'User'),
-('U2', 'ProPlayer99', 'proplayer99@example.com', 'hashed_password2', 'User'),
-('U3', 'CasualGamer', 'casualg@example.com', 'hashed_password3', 'User'),
-('U4', 'StrategyMaster', 'strategym@example.com', 'hashed_password4', 'User'),
-('U5', 'NoobSlayer', 'noobslayer@example.com', 'hashed_password5', 'User'),
-('YU', 'Yulian', 'yulian@example.com', 'admin_password4', 'Admin');
+INSERT INTO `Users` (`id`, `username`, `email`, `password`, `role`, `created_at`) VALUES
+(1, 'admin', 'admin@gamegurus.com', 'password', 'admin', '2025-04-03 19:13:55'),
+(2, 'gamer1', 'gamer1@example.com', 'password', 'user', '2025-04-03 19:13:55'),
+(3, 'proGamer', 'pro@example.com', 'password', 'user', '2025-04-03 19:13:55'),
+(6, 'ArtemShkurat', 'artem@example.com', 'admin_password3', 'admin', '2025-04-05 10:44:08'),
+(7, 'Enea', 'enea@example.com', 'admin_password4', 'admin', '2025-04-05 10:44:08'),
+(8, 'LuisGarcia', 'luis@example.com', 'admin_password2', 'admin', '2025-04-05 10:44:08'),
+(9, 'Yulian', 'yulian@example.com', 'admin_password4', 'admin', '2025-04-05 10:44:08'),
+(10, 'GamerKing', 'gamerking@example.com', 'hashed_password1', 'user', '2025-04-05 10:44:08'),
+(11, 'ProPlayer99', 'proplayer99@example.com', 'hashed_password2', 'user', '2025-04-05 10:44:08'),
+(12, 'CasualGamer', 'casualg@example.com', 'hashed_password3', 'user', '2025-04-05 10:44:08'),
+(13, 'StrategyMaster', 'strategym@example.com', 'hashed_password4', 'user', '2025-04-05 10:44:08'),
+(14, 'NoobSlayer', 'noobslayer@example.com', 'hashed_password5', 'user', '2025-04-05 10:44:08');
 
 --
 -- Indexes for dumped tables
@@ -163,36 +238,86 @@ INSERT INTO `Users` (`user_ID`, `username`, `email`, `password`, `role`) VALUES
 -- Indexes for table `Account`
 --
 ALTER TABLE `Account`
-  ADD KEY `user_ID` (`user_ID`),
-  ADD KEY `tip_ID` (`tip_ID`);
+  ADD KEY `tip_id` (`tip_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `Comment`
+-- Indexes for table `Categories`
 --
-ALTER TABLE `Comment`
-  ADD PRIMARY KEY (`comment_ID`),
-  ADD KEY `tip_ID` (`tip_ID`),
-  ADD KEY `user_ID` (`user_ID`);
+ALTER TABLE `Categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indexes for table `Game`
+-- Indexes for table `Comments`
 --
-ALTER TABLE `Game`
-  ADD PRIMARY KEY (`game_name`);
+ALTER TABLE `Comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tip_id` (`tip_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `Tip`
+-- Indexes for table `Games`
 --
-ALTER TABLE `Tip`
-  ADD PRIMARY KEY (`tip_ID`),
-  ADD KEY `game_name` (`game_name`),
-  ADD KEY `user_ID` (`user_ID`);
+ALTER TABLE `Games`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Game_Category`
+--
+ALTER TABLE `Game_Category`
+  ADD PRIMARY KEY (`game_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `Tips`
+--
+ALTER TABLE `Tips`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `game_id` (`game_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
-  ADD PRIMARY KEY (`user_ID`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Categories`
+--
+ALTER TABLE `Categories`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `Comments`
+--
+ALTER TABLE `Comments`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Games`
+--
+ALTER TABLE `Games`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `Tips`
+--
+ALTER TABLE `Tips`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -202,22 +327,29 @@ ALTER TABLE `Users`
 -- Constraints for table `Account`
 --
 ALTER TABLE `Account`
-  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `Users` (`user_ID`),
-  ADD CONSTRAINT `account_ibfk_2` FOREIGN KEY (`tip_ID`) REFERENCES `Tip` (`tip_ID`);
+  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`tip_id`) REFERENCES `Tips` (`id`),
+  ADD CONSTRAINT `account_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 
 --
--- Constraints for table `Comment`
+-- Constraints for table `Comments`
 --
-ALTER TABLE `Comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`tip_ID`) REFERENCES `Tip` (`tip_ID`),
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `Users` (`user_ID`);
+ALTER TABLE `Comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`tip_id`) REFERENCES `Tips` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `Tip`
+-- Constraints for table `Game_Category`
 --
-ALTER TABLE `Tip`
-  ADD CONSTRAINT `tip_ibfk_1` FOREIGN KEY (`game_name`) REFERENCES `Game` (`game_name`),
-  ADD CONSTRAINT `tip_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `Users` (`user_ID`);
+ALTER TABLE `Game_Category`
+  ADD CONSTRAINT `game_category_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `game_category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `Categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `Tips`
+--
+ALTER TABLE `Tips`
+  ADD CONSTRAINT `tips_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tips_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,5 +1,34 @@
-html 
-    head    
-        title #{title}
-    body 
-        block content
+//- Main layout template that holds the structure for all pages
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title ? `${title} | Game Gurus` : 'Game Gurus'
+    link(rel='stylesheet', href='/css/main.css')
+  body
+    //- header section with navigation
+    header
+      nav.main-nav
+        //- logo with home link
+        a.logo(href='/')
+          img.logo-icon(src='/images/GG_logo.png' alt='Game Gurus Logo' height='40')
+          span Game Gurus
+        //- Main navigation links
+        .nav-links
+          a(href='/') Home
+          a(href='/games') Games
+          a(href='/tips') Tips
+          a(href='/about') About
+        //- Authentication links (we will expand on sprint 4)
+        .auth-links
+          a(href='/login') Login
+          a(href='/register') Sign Up
+    
+    main.container
+      block content
+    
+    //- Footer section
+    footer
+      .footer-content
+        p &copy; 2025 Game Gurus. All rights reserved.

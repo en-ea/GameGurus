@@ -1,21 +1,21 @@
-const { User } = require("../classes/user");
+const { User } = require("../models/user");
 
 exports.setPassword = async (req, res) => {
-    const params = req.body;
-    const user = new User(params.email);
+    const { email, password, username } = req.body;
+
+    const user = new User(null, email, username);
+
     try {
-        const uId = await user.getIdFromEmail();
+        const uId = await user.getIdFromEmailOrUsername(email);
         if (uId) {
-            // Existing user: set password
-            await user.setUserPassword(params.password);
-            res.send('Password set successfully');
+            await user.setUserPassword(password);
+            res.send('Password updated successfully');
         } else {
-            // New user: add user
-            const newId = await user.addUser(params.password);
+            await user.addUser(password);
             res.send('New user registered successfully');
         }
     } catch (err) {
-        console.error(`Error while adding password: `, err.message);
+        console.error("Error while adding password:", err.message);
         res.status(500).send("Internal server error");
     }
 };

@@ -1,29 +1,27 @@
-const { User } = require("../classes/user");
+const { User } = require("../models/user");
 
-// Check submitted email and password pair
+// Check submitted email/username and password pair
 exports.authenticate = async (req, res) => {
-    params = req.body;
-    var user = new User(params.email);
+    const { email: identifier, password } = req.body;
+    const user = new User(null, identifier);
+
     try {
-        uId = await user.getIdFromEmail();
+        const uId = await user.getIdFromEmailOrUsername(identifier);
         if (uId) {
-            match = await user.authenticate(params.password);
-            console.log("Hello, this section is looking goood", match);
+            const match = await user.authenticate(password);
             if (match) {
                 req.session.uid = uId;
                 req.session.loggedIn = true;
-                console.log(req.session.id);
+                console.log("Logged in:", req.session.uid);
                 res.redirect("/");
+            } else {
+                res.send("Invalid password");
             }
-            else {
-                // TODO improve the user journey here
-                res.send('invalid password');
-            }
-        }
-        else {
-            res.send('invalid email');
+        } else {
+            res.send("Invalid email or username");
         }
     } catch (err) {
-        console.error(`Error while comparing `, err.message);
+        console.error("Error during login:", err.message);
+        res.status(500).send("Internal server error");
     }
 };
