@@ -5,6 +5,8 @@ class Tip {
     // Tip properties
     id;
     title;
+    focus_area; // Added focus area attribute
+    level;      // Added level attribute
     content;
     game_id;
     user_id;
@@ -49,8 +51,31 @@ class Tip {
         `;
         return await db.query(sql);
     }
+    
+    // Get comments for a tip
+    async getTipComments() {
+        if (!this.id) return [];
+        
+        const sql = `
+            SELECT c.*, u.username 
+            FROM Comments c
+            JOIN Users u ON c.user_id = u.id
+            WHERE c.tip_id = ?
+            ORDER BY c.created_at DESC
+        `;
+        return await db.query(sql, [this.id]);
+    }
+
+    // Static method to add a comment
+    static async addComment(tipId, userId, content) {
+        const sql = `
+            INSERT INTO Comments (content, tip_id, user_id)
+            VALUES (?, ?, ?)
+        `;
+        return await db.query(sql, [content, tipId, userId]);
+    }
 }
 
-module.exports  = {
+module.exports = {
     Tip
 }

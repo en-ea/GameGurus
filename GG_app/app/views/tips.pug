@@ -1,10 +1,14 @@
-//- Extends the base layout template 
 extends layout
 
-//- Content block that replaces 'block content'
 block content
-  //- Page title (dynamic from route)
   h1= title
+
+  //- Create Post button - conditional display
+  .top-actions(style="margin-bottom: 20px;")
+    if session && session.loggedIn
+      a.btn.btn-primary(href="/create_post") Create a Post
+    else
+      a.btn.btn-secondary(href="/login?redirect=/create_post") Login to Create a Post
   
   //- Grid container for tips
   .tips-grid

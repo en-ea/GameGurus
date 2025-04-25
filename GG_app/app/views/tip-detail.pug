@@ -1,24 +1,43 @@
-//- Extends the base layout template (layout.pug)
 extends layout
 
-//- Defines the main content block
 block content
-  //- Container for tip details
   .tip-detail
-    //- Display the tip title
     h1= tip.title
-    
-    //- Game and author metadata
     p.tip-meta Game: #{tip.game_title}
     p.tip-meta By: #{tip.username}
     
-    //- Main content section
     .tip-content
-      //- Full tip content
       p= tip.content
     
-    //- Navigation buttons
-    //- Link to view the game this tip is for
-    a.btn(href=`/games/${tip.game_id}`) View Game
-    //- Link to return to all tips
-    a.btn(href="/tips") Back to Tips
+    //- Comments section
+    .comments-section
+      h2 Comments
+      
+      //- Add new comment form - only for logged in users
+      if session && session.loggedIn
+        form.comment-form(action=`/tips/${tip.id}/comment` method="POST")
+          .form-group
+            label.form-label(for="comment") Add a comment:
+            textarea.form-control(name="content", rows="3", placeholder="Share your thoughts on this tip...", required)
+          button.btn.btn-primary(type="submit") Post Comment
+      else
+        .login-prompt
+          p Want to join the conversation? 
+          a.btn(href=`/login?redirect=/tips/${tip.id}`) Login to Comment
+      
+      //- List existing comments
+      if comments && comments.length
+        .comments-list
+          each comment in comments
+            .comment-card
+              .comment-header
+                a.comment-author(href=`/users/${comment.user_id}`) #{comment.username}
+                span.comment-date #{new Date(comment.created_at).toLocaleDateString()}
+              .comment-body
+                p= comment.content
+      else
+        p.no-comments No comments yet. Be the first to share your thoughts!
+    
+    .navigation-buttons
+      a.btn(href=`/games/${tip.game_id}`) View Game
+      a.btn(href="/tips") Back to Tips

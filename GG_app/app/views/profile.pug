@@ -1,0 +1,65 @@
+extends layout
+
+block content
+  .profile-card
+    h2 My profile
+
+    .profile-header
+      .profile-image
+        img(src="/images/profile-placeholder.png", alt="Profile Picture")
+      .user-info
+        p Username: #{user.username}
+        p Email: #{user.email}
+        p Wisdom Points: #{user.wisdom || 0}
+        a.btn-edit(href="/edit_profile") Edit Profile
+
+    // Stats section
+    .profile-stats
+      .stat-card
+        .stat-value #{user.wisdom || 0}
+        .stat-label Wisdom Points
+      
+      .stat-card
+        .stat-value #{tipCount || 0}
+        .stat-label Tips Posted
+      
+      .stat-card
+        .stat-value #{commentCount || 0}
+        .stat-label Comments
+
+    // Activity sections
+    .profile-sections
+      .profile-section
+        h2 My Tips
+        if tips && tips.length
+          .mini-list
+            each tip in tips
+              .mini-card
+                h3.mini-title= tip.title
+                p.mini-meta Game: #{tip.game_title}
+                a.mini-link(href=`/tips/${tip.id}`) View Tip
+        else
+          p.empty-list You haven't posted any tips yet.
+      
+      .profile-section
+        h2 My Comments
+        if comments && comments.length
+          .mini-list
+            each comment in comments
+              .mini-card
+                p.mini-content= comment.content.substring(0, 50) + (comment.content.length > 50 ? '...' : '')
+                p.mini-meta On: #{comment.tip_title}
+                a.mini-link(href=`/tips/${comment.tip_id}`) View Tip
+        else
+          p.empty-list You haven't made any comments yet.
+
+    // Saved tips section (kept from your original)
+    .saved-section
+      a.saved-link(href="/saved_tips")
+        span.icon-doc 🗎
+        span Saved Tips
+        span.arrow →
+
+    // Logout button (kept from your original)
+    form(action="/logout", method="GET")
+      button.btn-logout(type="submit") Log out

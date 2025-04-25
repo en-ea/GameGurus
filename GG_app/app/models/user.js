@@ -9,6 +9,7 @@ class User {
     username;
     email;
     role;
+    wisdom;
 
     constructor(id = null, email, username = null) {
         this.id = id;
@@ -27,6 +28,7 @@ class User {
         this.username = result[0].username;
         this.email = result[0].email;
         this.role = result[0].role;
+        this.wisdom = result[0].wisdom || 0;
         return true;
     }
     return false;
@@ -103,7 +105,53 @@ class User {
             return submitted === storedPassword;
         }
     }
+    // Get comments by a specific user
+async getUserComments() {
+    if (!this.id) return [];
+    
+    const sql = `
+        SELECT c.*, t.title as tip_title, g.title as game_title
+        FROM Comments c
+        JOIN Tips t ON c.tip_id = t.id
+        JOIN Games g ON t.game_id = g.id
+        WHERE c.user_id = ?
+        ORDER BY c.created_at DESC
+    `;
+    return await db.query(sql, [this.id]);
 }
+
+async calculateWisdom() {
+    if (!this.id) return 0;
+    
+    // Count tips (3 points each)
+    const tipsSql = "SELECT COUNT(*) as tipCount FROM Tips WHERE user_id = ?";
+    const tipsResult = await db.query(tipsSql, [this.id]);
+    const tipPoints = (tipsResult[0].tipCount || 0) * 3;
+    
+    // Count comments (2 points each)
+    const commentsSql = "SELECT COUNT(*) as commentCount FROM Comments WHERE user_id = ?";
+    const commentsResult = await db.query(commentsSql, [this.id]);
+    const commentPoints = (commentsResult[0].commentCount || 0) * 2;
+    
+    // Total wisdom
+    const totalWisdom = tipPoints + commentPoints;
+    
+    // Update user's wisdom in database
+    await this.updateWisdom(totalWisdom);
+    
+    return totalWisdom;
+}
+
+async updateWisdom(points) {
+    if (!this.id) return false;
+    
+    const sql = "UPDATE Users SET wisdom = ? WHERE id = ?";
+    await db.query(sql, [points, this.id]);
+    this.wisdom = points;
+    return true;
+}
+}
+
 
 module.exports  = {
     User

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Apr 05, 2025 at 06:04 PM
+-- Generation Time: Apr 09, 2025 at 11:00 PM
 -- Server version: 9.2.0
 -- PHP Version: 8.2.27
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `Account` (
   `user_id` int DEFAULT NULL,
   `profile_picture` blob,
-  `tip_id` int DEFAULT NULL
+  `saved_tips` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Account`
 --
 
-INSERT INTO `Account` (`user_id`, `profile_picture`, `tip_id`) VALUES
+INSERT INTO `Account` (`user_id`, `profile_picture`, `saved_tips`) VALUES
 (1, NULL, 3),
 (2, NULL, 1),
 (3, NULL, 4);
@@ -238,7 +238,7 @@ INSERT INTO `Users` (`id`, `username`, `email`, `password`, `role`, `created_at`
 -- Indexes for table `Account`
 --
 ALTER TABLE `Account`
-  ADD KEY `tip_id` (`tip_id`),
+  ADD KEY `tip_id` (`saved_tips`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -317,7 +317,7 @@ ALTER TABLE `Tips`
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -327,7 +327,7 @@ ALTER TABLE `Users`
 -- Constraints for table `Account`
 --
 ALTER TABLE `Account`
-  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`tip_id`) REFERENCES `Tips` (`id`),
+  ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`saved_tips`) REFERENCES `Tips` (`id`),
   ADD CONSTRAINT `account_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 
 --

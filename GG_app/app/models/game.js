@@ -13,6 +13,31 @@ class Game {
     constructor(id = null) {
         this.id = id;
     }
+
+    // Search for games using search bar
+    static async searchGames(query) 
+    {
+        if (!query) return [];
+        
+        // Query to search games by title
+        const sql = `
+            SELECT * 
+            FROM Games 
+            WHERE title LIKE ?
+        `;
+        const searchParam = `%${query}%`;
+        const results = await db.query(sql, [searchParam]);
+        
+        // Convert each result to a Game instance
+        return results.map(game => {
+            const gameInstance = new Game(game.id);
+            gameInstance.title = game.title;
+            gameInstance.description = game.description;
+            gameInstance.platform = game.platform;
+            gameInstance.release_date = game.release_date;
+            return gameInstance;
+    });
+}
     
     /* Get and populate game details from database
        returns {Promise<boolean>} True if game is found, else its false */

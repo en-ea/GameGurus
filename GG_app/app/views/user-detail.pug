@@ -1,44 +1,44 @@
-//- Extends the base layout template
 extends layout
 
-//- Main content block injected into the layout
 block content
-  //- User profile container
   .user-detail
-    //- Dynamic page title with username
     h1= user.username + "'s Profile"
     
-    //- User metadata section
     .user-info
-      //- Displays the user's email
       p.user-email Email: #{user.email}
-      //- Displays the user's role
       p.user-role Role: #{user.role}
+      p.user-wisdom Wisdom Points: #{user.wisdom || 0}
     
     //- User's tips section
     .user-tips
-      //- Section header with username
       h2 Tips by #{user.username}
       
-      //- Checks if tips exist
       if tips && tips.length
-        //- Container for tips list
         .tips-list
-          //- Loops through each tip
           each tip in tips
-            //- Individual tip card
             .tip-item
-              //- Tip title
               h3= tip.title
-              //- Associated game name
               p Game: #{tip.game_title}
-              //- Truncated tip preview (first 100 chars + ellipsis if longer)
               p= tip.content.substring(0, 100) + (tip.content.length > 100 ? '...' : '')
-              //- Link to full tip
               a.btn(href=`/tips/${tip.id}`) Read More
       else
-        //- Fallback for no tips
         p This user hasn't posted any tips yet.
     
-    //- Navigation button back to users list
+    //- User's comments section
+    .user-comments
+      h2 Comments by #{user.username}
+      
+      if comments && comments.length
+        .comments-list
+          each comment in comments
+            .comment-card
+              .comment-header
+                span.comment-info On tip: 
+                a(href=`/tips/${comment.tip_id}`) #{comment.tip_title}
+                span.comment-date #{new Date(comment.created_at).toLocaleDateString()}
+              .comment-body
+                p= comment.content
+      else
+        p This user hasn't commented on any tips yet.
+    
     a.btn(href="/users") Back to Users
