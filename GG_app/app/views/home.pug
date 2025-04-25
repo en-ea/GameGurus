@@ -1,0 +1,50 @@
+//- Homepage template extending the main layout
+extends layout
+block content
+  //- Hero section with welcome message
+  section.hero
+    h1 Welcome to Game Gurus
+    p The ultimate platform for gaming tips and tricks
+    .hero-buttons
+      a.btn.primary-btn(href="/games") Browse Games
+      a.btn.secondary-btn(href="/tips") View Tips
+  
+  //- Featured tips section
+  section.featured-tips
+    h2 Featured Tips
+    .tips-grid
+      //- Check if tips data exists before iterating
+      if tips && tips.length
+        each tip in tips
+          .tip-card
+            h3= tip.title
+            p Game: #{tip.game_title}
+            p By: #{tip.username}
+            //- Truncate content if it's too long
+            p= tip.content.substring(0, 100) + (tip.content.length > 100 ? '...' : '')
+            a.btn(href=`/tips/${tip.id}`) Read More
+      else
+        p No tips available yet.
+  
+  //- Games section with category browsing
+  section.games-section
+    h2 Browse Games by Category
+    .categories-list
+      if categories && categories.length
+        each category in categories
+          a.category-tag(href=`/category/${category.id}`)= category.name
+      else
+        p No categories available.
+    
+    //- Popular games grid
+    h2 Popular Games
+    .games-grid
+      if games && games.length
+        each game in games
+          .game-card
+            h3= game.title
+            if game.platform
+              p Platform: #{game.platform}
+            a.btn(href=`/games/${game.id}`) View Game
+      else
+        p No games available yet.

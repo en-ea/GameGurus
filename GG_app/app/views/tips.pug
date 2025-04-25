@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+
+  //- Create Post button - conditional display
+  .top-actions(style="margin-bottom: 20px;")
+    if session && session.loggedIn
+      a.btn.btn-primary(href="/create_post") Create a Post
+    else
+      a.btn.btn-secondary(href="/login?redirect=/create_post") Login to Create a Post
+  
+  //- Grid container for tips
+  .tips-grid
+    //- Check if tips exist and aren't empty
+    if tips && tips.length
+      //- Loop through each tip
+      each tip in tips
+        //- Individual tip card
+        .tip-card
+          //- Tip title
+          h3= tip.title
+          //- Associated game name
+          p Game: #{tip.game_title}
+          //- Author username
+          p By: #{tip.username}
+          //- Truncated tip content (first 100 chars + ellipsis if longer)
+          p= tip.content.substring(0, 100) + (tip.content.length > 100 ? '...' : '')
+          //- Link to full tip view
+          a.btn(href=`/tips/${tip.id}`) Read More
+    else
+      //- Message shown when no tips exist
+      p No tips found.

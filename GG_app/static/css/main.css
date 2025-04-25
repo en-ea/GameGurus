@@ -1,0 +1,768 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+/* Link styles */
+a {
+  color: #6b21a8; /* Purple from GameGurus logo */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #8b5cf6;
+}
+
+/* Heading margins */
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
+
+/* Layout container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Header styles */
+header {
+  background-color: #6b21a8;
+  color: white;
+  padding: 1rem 0;
+}
+
+/* Navigation bar */
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+/* Logo styling */
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-icon {
+  margin-right: 10px;
+  height: 40px;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+}
+
+/* Auth buttons */
+.auth-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-links a {
+  color: white;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.search-box {
+  color: white;
+  width: 800px;
+  margin: auto 0;
+  border-radius: 5px;
+  display: flex;
+}
+
+
+.search-box input {
+  flex: 1;
+  padding: 2px;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid #ccc;
+}
+
+.search-box button {
+  padding: 8px 15px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid white;
+  background-color: #6b21a8 ;
+  color: white;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+/* Main content area */
+main {
+  min-height: 80vh;
+  padding: 2rem 0;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #6b21a8;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+.btn:hover {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+/* Secondary button variant */
+.secondary-btn {
+  background-color: transparent;
+  color: #6b21a8;
+  border: 1px solid #6b21a8;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(107, 33, 168, 0.1);
+  color: #6b21a8;
+}
+
+/* Grid layouts */
+.games-grid,
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Card styles */
+.game-card,
+.tip-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Category styles */
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.category-tag {
+  background-color: #8b5cf6;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.categories-filter {
+  margin-bottom: 1.5rem;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.category-btn {
+  padding: 0.25rem 0.75rem;
+  background-color: #e5e7eb;
+  color: #333;
+  border-radius: 4px;
+}
+
+.category-btn.active, 
+.category-btn:hover {
+  background-color: #6b21a8;
+  color: white;
+}
+
+/* Game detail page */
+.game-detail {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-meta {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.game-info {
+  margin-bottom: 2rem;
+}
+
+.game-tips {
+  margin-top: 2rem;
+}
+
+.tip-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Tip detail page */
+.tip-detail {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tip-meta {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.tip-content {
+  margin: 1.5rem 0;
+}
+
+/* Form styles */
+form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  padding: 1rem;
+}
+
+/* CSS style for Login and Register */
+.auth-wrapper {
+  background-color: white;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.auth-wrapper h1 {
+  margin-bottom: 1.5rem;
+}
+
+/* Profile style */
+.profile-card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #6b21a8;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.icon-doc {
+  font-size: 2rem;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-image img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #b2eafc;
+}
+
+.user-info {
+  text-align: left;
+}
+
+.btn-edit {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background-color: #ddd;
+  color: #000;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.saved-section {
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.saved-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.saved-link:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to bottom, #f87171, #ef4444);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(to bottom, #ef4444, #dc2626);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .nav-links, .auth-links {
+    margin-top: 1rem;
+  }
+  
+  .games-grid,
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
+
+
+/* Create post container */
+.create-post-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 2rem;
+  color: #6b21a8;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Form styling */
+.tip-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  border-color: #6b21a8;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(107, 33, 168, 0.2);
+}
+
+/* Radio button group */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-label {
+  color: #555;
+}
+
+/* Form actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-submit {
+  background-color: #6b21a8;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: #8b5cf6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .create-post-container {
+    padding: 1.5rem;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Comments styling */
+.comments-section {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.comment-form {
+  margin-bottom: 2rem;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.comment-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: #6b21a8;
+}
+
+.comment-date {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.comment-body {
+  color: #333;
+}
+
+.login-prompt {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.no-comments {
+  color: #666;
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* User comments in profile */
+.user-comments {
+  margin-top: 2rem;
+}
+
+.comment-info {
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+/* Profile styling */
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 1.8rem;
+  color: #6b21a8;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Stats cards */
+.profile-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.stat-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6b21a8;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Profile sections */
+.profile-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-section {
+  background-color: #f9f9f9;
+  padding: 1.2rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+  color: #6b21a8;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+/* Mini lists */
+.mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.mini-card {
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.mini-title {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.mini-content {
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.mini-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.4rem;
+}
+
+.mini-link {
+  font-size: 0.9rem;
+  color: #6b21a8;
+  font-weight: bold;
+}
+
+.empty-list {
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Profile actions */
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* User wisdom in profile */
+.user-wisdom {
+  background-color: #f0e6ff;
+  color: #6b21a8;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-sections {
+    grid-template-columns: 1fr;
+  }
+}
